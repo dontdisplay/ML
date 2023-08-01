@@ -1,0 +1,41 @@
+from collections import defaultdict
+
+graph=defaultdict(list)
+
+def add_Edge(u,v):
+    graph[u].append(v)
+
+
+
+def DFS(start,goal,depth):
+    print(start,end="->")
+    if start==goal:
+        return True
+    if depth<=0:
+        return False
+    for i in graph[start]:
+        if (DFS(i,goal,depth-1)):
+            return True
+    return False
+
+
+def DFID(start,goal,MaxDepth):
+    print("StartNode: ",start," GoalNode: ",goal)
+    for i in range(MaxDepth):
+        print("DFS at level",i+1)
+        print("Path Followed: ",end=" ")
+        found=DFS(start,goal,i)
+        if found:
+            print("\nGoal Node Found")
+            return
+        else:
+            print("\nGoal Node Not Found")
+
+add_Edge('A','B')
+add_Edge('A','C')
+add_Edge('B','D')
+add_Edge('B','E')
+add_Edge('B','F')
+add_Edge('C','G')
+add_Edge('C','H')
+DFID('A','H',3)
