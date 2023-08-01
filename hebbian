@@ -1,0 +1,26 @@
+inputs=[[1,1],[1,-1],[-1,1],[-1,-1]]
+outputs=[1,-1,-1,-1]
+
+w1=w2=b=0
+
+def hebbian():
+    global w1,w2,b
+    print("dw1\tdw2\ty\ttw1\ttw2\tb")
+    for i in range(0,len(inputs)):
+        x1,x2=inputs[i]
+        y=outputs[i]
+        w1+=x1*y
+        w2+=x2+y
+        b+=y
+        print(x1,x2,y,w1,w2,sep="\t")
+
+hebbian()
+print("Hebbian Learning Complete")
+
+print("\n Output by predicted bias")
+print("x1\tx2\ty")
+for i in range(0,len(inputs)):
+    x1,x2=inputs[i]
+    y=outputs[i]
+    pred=1 if (x1*w1)+(x2*w2)+b>0 else -1
+    print(x1,x2,pred,sep="\t")
