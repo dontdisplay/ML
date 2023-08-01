@@ -1,0 +1,50 @@
+from collections import defaultdict
+
+graph=defaultdict(list)
+
+def addEdge(u,v,c):
+    graph[u].append([v,c])
+
+def BEST(start,goal):
+    open=[]
+    closed=[]
+    visited=[]
+
+    open.append([start,0])
+    visited.append(start)
+
+    while open:
+        Node=open.pop(0)[0]
+        print("Current Node: ",Node,)
+        closed.append(Node)
+        if(Node==goal):
+            print("Goal Node Found")
+            print("Path Taken: ",visited)
+            return
+        for v,c in graph[Node]:
+            if v not in visited:
+                open.append([v,c])
+                visited.append(v)
+        print("closed:",closed)
+        print("Unsorted Open: ",open)
+        open.sort(key=lambda x:x[1])
+        print("Sorted Open: ",open)
+        print("\n\n\n")
+    return False
+
+addEdge('S','A',3)
+addEdge('S','B',6)
+addEdge('S','C',5)
+addEdge('A','E',8)
+addEdge('A','D',9)
+addEdge('B','G',4)
+addEdge('B','F',12)
+addEdge('C','H',7)
+addEdge('H','J',6)
+addEdge('H','I',5)
+addEdge('I','M',2)
+addEdge('I','L',10)
+addEdge('I','K',1)
+
+
+BEST('S','I')
