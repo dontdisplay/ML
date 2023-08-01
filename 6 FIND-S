@@ -1,0 +1,22 @@
+import csv
+rows=[]
+
+with open("data.csv") as data:
+    next(data)
+    for row in csv.reader(data):
+        rows.append(row)
+
+attributes=len(rows[0])-1
+
+hypothesis=rows[0]
+
+for row in rows:
+    print("\nTraining data: ",row)
+    for i in range(attributes):
+        if(row[attributes]=='yes'):
+            if(row[i]!=hypothesis[i]):
+                hypothesis[i]='?'
+    print("Hypothesis: ",hypothesis)
+
+print("\nFINAL HYPOTHESIS")
+print(hypothesis)
